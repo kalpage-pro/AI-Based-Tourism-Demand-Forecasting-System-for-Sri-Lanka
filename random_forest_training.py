@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
+import joblib
+from flask import Flask, jsonify, request
 
 # Load dataset
 df = pd.read_csv("C:\\Users\\SDJ\\Desktop\\2026 Assignment\\touristData.csv")
@@ -49,3 +51,37 @@ plt.figure(figsize=(10,6))
 plt.barh(features, importances)
 plt.title("Feature Importance for Tourism Demand")
 plt.show()
+
+# Save model
+joblib.dump(model, "backend/tourism_rf_model.pkl")
+print("Model saved successfully")
+
+# Save model features to avoid mismatch errors
+joblib.dump(X.columns.tolist(), "backend/model_features.pkl")
+print("Model features saved successfully")
+
+# Flask app setup
+app = Flask(__name__)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        # Parse input JSON
+        input_data = request.get_json()
+        input_df = pd.DataFrame([input_data])
+        input_df = pd.get_dummies(input_df, drop_first=True)
+
+        # Align columns with training data
+        missing_cols = set(X.columns) - set(input_df.columns)
+        for col in missing_cols:
+            input_df[col] = 0
+        input_df = input_df[X.columns]
+
+        # Make prediction
+        prediction = model.predict(input_df)[0]
+        return jsonify({"prediction": prediction})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+if __name__ == '__main__':
+    app.run(debug=True)
