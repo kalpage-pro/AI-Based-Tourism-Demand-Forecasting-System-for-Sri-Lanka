@@ -1,35 +1,44 @@
-from flask import Flask, jsonify, request
-import joblib
-import pandas as pd
+from fastapi import FastAPI
+from pydantic import BaseModel
+from backend.predict import predict_tourism
 
-# Load the model and features
-model = joblib.load("tourism_rf_model.pkl")
-features = joblib.load("model_features.pkl")
+app = FastAPI(
+    title="AI-Based Tourism Demand Forecasting API",
+    description="Predicts tourist arrivals, tourism revenue, and hotel occupancy",
+    version="1.0"
+)
 
-app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "Tourism Forecasting API is running"
+# Input schema
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        # Parse input JSON
-        input_data = request.get_json()
-        input_df = pd.DataFrame([input_data])
+class TourismInput(BaseModel):
+    num_establishments: float
+    num_rooms: float
+    dollarrate: float
+    airpassengerfaresindex: float
+    consumerpriceindex: float
+    apparent_temperature_mean_celcius: float
+    rain_sum_mm: float
+    sunshine_duration_hours: float
+    month_sin: float
+    month_cos: float
 
-        # Align columns with training data
-        missing_cols = set(features) - set(input_df.columns)
-        for col in missing_cols:
-            input_df[col] = 0
-        input_df = input_df[features]
 
-        # Make prediction
-        prediction = model.predict(input_df)[0]
-        return jsonify({"prediction": prediction})
-    except Exception as e:
-        return jsonify({"error": str(e)})
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Routes
+
+@app.get("/")
+def root():
+    return {"message": "Tourism Forecasting API is running"}
+
+
+@app.post("/predict")
+def predict(data: TourismInput):
+    input_data = data.dict()
+    result = predict_tourism(input_data)
+    return result
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)

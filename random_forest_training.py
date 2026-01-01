@@ -1,87 +1,112 @@
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-import matplotlib.pyplot as plt
+import numpy as np
 import joblib
-from flask import Flask, jsonify, request
 
-# Load dataset
-df = pd.read_csv("C:\\Users\\SDJ\\Desktop\\2026 Assignment\\touristData.csv")
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 
-# Sort by time
-df = df.sort_values("date")
 
-# Define features and target
-X = df.drop(columns=["totalCount", "date"])
-y = df["totalCount"]
+# 1. Load dataset
 
-# Encode categorical features
-X = pd.get_dummies(X, drop_first=True)
+df = pd.read_csv("data/touristData.csv")
 
-# Time-based split
-split_index = int(len(df) * 0.8)
-X_train, X_test = X[:split_index], X[split_index:]
-y_train, y_test = y[:split_index], y[split_index:]
-
-# Train Random Forest model
-model = RandomForestRegressor(
-    n_estimators=200,
-    random_state=42
+# Fix totalcount if needed
+df["totalcount"] = (
+    df["totalcount"].astype(str).str.replace(",", "").astype(float)
 )
 
+# Convert month to numeric if needed
+if df["month"].dtype == object:
+    df["month_num"] = pd.to_datetime(df["month"], format="%B").dt.month
+else:
+    df["month_num"] = df["month"]
+
+# Create date column
+df["date"] = pd.to_datetime(
+    df["year"].astype(str) + "-" + df["month_num"].astype(str) + "-01"
+)
+
+# Sort for time-series
+df = df.sort_values(by=["origincountry_encoded", "date"])
+
+
+# 2. Feature engineering
+
+df["occupancy_rate"] = df["totalcount"] / df["num_rooms"]
+df["occupancy_rate"] = df["occupancy_rate"].clip(0, 1)
+
+df["month_sin"] = np.sin(2 * np.pi * df["month_num"] / 12)
+df["month_cos"] = np.cos(2 * np.pi * df["month_num"] / 12)
+
+# 3. Feature & target selection
+
+feature_cols = [
+    "num_establishments",
+    "num_rooms",
+    "dollarrate",
+    "airpassengerfaresindex",
+    "consumerpriceindex",
+    "apparent_temperature_mean_celcius",
+    "rain_sum_mm",
+    "sunshine_duration_hours",
+    "month_sin",
+    "month_cos"
+]
+
+target_cols = [
+    "totalcount",        # arrivals
+    "tourism_revenue",   # revenue
+    "occupancy_rate"     # occupancy
+]
+
+X = df[feature_cols]
+y = df[target_cols]
+
+
+# 4. Train-test split (NO shuffle)
+
+split_index = int(len(df) * 0.8)
+
+X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
+y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]
+
+
+# 5. Train Random Forest
+
+rf = RandomForestRegressor(
+    n_estimators=200,
+    max_depth=15,
+    random_state=42,
+    n_jobs=-1
+)
+
+model = MultiOutputRegressor(rf)
 model.fit(X_train, y_train)
 
-# Predictions
+
+# 6. Evaluation
+
 y_pred = model.predict(X_test)
 
-# Evaluation
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 mae = mean_absolute_error(y_test, y_pred)
-rmse = mean_squared_error(y_test, y_pred) ** 0.5
-r2 = r2_score(y_test, y_pred)
 
-print("MAE:", mae)
-print("RMSE:", rmse)
-print("R² Score:", r2)
+print("Random Forest Performance")
+print("--------------------------")
+print(f"RMSE: {rmse:.2f}")
+print(f"MAE : {mae:.2f}")
 
-# Plot feature importances
-importances = model.feature_importances_
-features = X.columns
+# Per target
+for i, col in enumerate(target_cols):
+    print(f"\nTarget: {col}")
+    print("RMSE:", np.sqrt(mean_squared_error(y_test.iloc[:, i], y_pred[:, i])))
+    print("MAE :", mean_absolute_error(y_test.iloc[:, i], y_pred[:, i]))
 
-plt.figure(figsize=(10,6))
-plt.barh(features, importances)
-plt.title("Feature Importance for Tourism Demand")
-plt.show()
 
-# Save model
+# 7. Save model & features
+
 joblib.dump(model, "backend/tourism_rf_model.pkl")
-print("Model saved successfully")
+joblib.dump(feature_cols, "backend/model_features.pkl")
 
-# Save model features to avoid mismatch errors
-joblib.dump(X.columns.tolist(), "backend/model_features.pkl")
-print("Model features saved successfully")
-
-# Flask app setup
-app = Flask(__name__)
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        # Parse input JSON
-        input_data = request.get_json()
-        input_df = pd.DataFrame([input_data])
-        input_df = pd.get_dummies(input_df, drop_first=True)
-
-        # Align columns with training data
-        missing_cols = set(X.columns) - set(input_df.columns)
-        for col in missing_cols:
-            input_df[col] = 0
-        input_df = input_df[X.columns]
-
-        # Make prediction
-        prediction = model.predict(input_df)[0]
-        return jsonify({"prediction": prediction})
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
-if __name__ == '__main__':
-    app.run(debug=True)
+print("\nModel and feature list saved successfully.")
