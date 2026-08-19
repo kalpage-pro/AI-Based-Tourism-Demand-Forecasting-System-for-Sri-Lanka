@@ -1,0 +1,109 @@
+:root {
+  /* Yellow Theme Colors */
+  --primary-yellow: #FFD700;
+  --secondary-yellow: #FFC107;
+  --accent-yellow: #FFEB3B;
+  --dark-yellow: #F9A825;
+  --light-yellow: #FFF9C4;
+  
+  /* Complementary Colors */
+  --dark-bg: #FFD700;
+  --darker-bg: #FFC107;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-dark: #111827;
+  --text-light: #ffffff;
+  --border-color: #FFC107;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(255, 215, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(255, 215, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(255, 215, 0, 0.2);
+  --glow: 0 0 20px rgba(255, 215, 0, 0.3);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--darker-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-yellow);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-yellow);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

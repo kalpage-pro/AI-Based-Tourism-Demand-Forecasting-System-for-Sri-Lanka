@@ -1,0 +1,338 @@
+/* Footer Styles */
+.footer {
+  background: linear-gradient(to right, #f59e0b, #d97706);
+  color: #222;
+  font-family: "Poppins", sans-serif;
+  padding: 60px 80px 20px;
+  border-top: 1px solid #e4e4e4;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Client Logos */
+.client-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+
+.client-logos img {
+  width: 120px;
+  height: 50px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.client-logos img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Contact Banner */
+.contact-banner {
+  position: relative;
+  background-image: url('/images/call-center-rep-640x230.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.contact-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  z-index: 1;
+}
+
+.banner-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.banner-text h2 {
+  font-size: 1.75rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.banner-text p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.banner-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.banner-buttons .btn-dark {
+  background: #1f2937;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.banner-buttons .btn-dark:hover {
+  background: #111827;
+  transform: translateY(-2px);
+}
+
+.banner-buttons .btn-light {
+  background: white;
+  color: #1f2937;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.banner-buttons .btn-light:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+/* Footer Top - Links Grid */
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-section h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+  font-size: 14px;
+}
+
+.footer-section ul li:hover {
+  color: #1f2937;
+  transform: translateX(5px);
+}
+
+.footer-section p {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Subscribe Box */
+.subscribe-box {
+  display: flex;
+  margin-top: 10px;
+}
+
+.subscribe-box input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid transparent;
+  border-radius: 25px 0 0 25px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.subscribe-box input:focus {
+  border-color: #1f2937;
+}
+
+.subscribe-box button {
+  background: #1f2937;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.subscribe-box button:hover {
+  background: #111827;
+}
+
+.footer-section small {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Horizontal Rule */
+.footer hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 20px 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.footer-bottom h3.brand {
+  font-weight: 700;
+  font-size: 22px;
+  color: #1f2937;
+  margin: 0;
+}
+
+.bottom-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.bottom-links p {
+  margin: 0;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.bottom-links p:hover {
+  color: #1f2937;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.footer .social-icons img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+  border-radius: 8px;
+}
+
+.footer .social-icons img:hover {
+  transform: scale(1.15);
+  opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 20px;
+  }
+
+  .client-logos img {
+    width: 80px;
+    height: 35px;
+  }
+
+  .contact-banner {
+    padding: 30px 20px;
+  }
+
+  .banner-text h2 {
+    font-size: 1.4rem;
+  }
+
+  .footer-top {
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bottom-links {
+    justify-content: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 15px;
+  }
+
+  .client-logos {
+    gap: 15px;
+  }
+
+  .client-logos img {
+    width: 60px;
+    height: 30px;
+  }
+
+  .banner-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .banner-buttons .btn-dark,
+  .banner-buttons .btn-light {
+    width: 100%;
+  }
+
+  .subscribe-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .subscribe-box input {
+    border-radius: 25px;
+  }
+
+  .subscribe-box button {
+    border-radius: 25px;
+  }
+}
