@@ -1,0 +1,33 @@
+# Dependencies
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Model files (optional - uncomment if you don't want to track models)
+# models/*.pkl
+
+# Data files (optional)
+# *.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

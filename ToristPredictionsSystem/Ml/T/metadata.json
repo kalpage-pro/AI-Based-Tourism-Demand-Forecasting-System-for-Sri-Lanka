@@ -1,0 +1,109 @@
+{
+  "features_base": [
+    "year",
+    "month_num",
+    "month_sin",
+    "month_cos",
+    "quarter",
+    "dollarrate",
+    "apparent_temperature",
+    "sunshine",
+    "rain",
+    "precipitation_hours",
+    "num_establishments",
+    "num_rooms",
+    "airfare_index",
+    "cpi",
+    "arrivals_lag1",
+    "arrivals_lag2",
+    "arrivals_lag3",
+    "arrivals_lag12",
+    "arrivals_roll3",
+    "arrivals_roll6",
+    "arrivals_std3",
+    "arrivals_yoy"
+  ],
+  "features_revenue": [
+    "year",
+    "month_num",
+    "month_sin",
+    "month_cos",
+    "quarter",
+    "dollarrate",
+    "apparent_temperature",
+    "sunshine",
+    "rain",
+    "precipitation_hours",
+    "num_establishments",
+    "num_rooms",
+    "airfare_index",
+    "cpi",
+    "arrivals_lag1",
+    "arrivals_lag2",
+    "arrivals_lag3",
+    "arrivals_lag12",
+    "arrivals_roll3",
+    "arrivals_roll6",
+    "arrivals_std3",
+    "arrivals_yoy",
+    "revenue_lag1"
+  ],
+  "targets": {
+    "arrivals": "total_arrivals",
+    "revenue": "tourism_revenue",
+    "occupancy": "hotel_occupancy_rate"
+  },
+  "best_params": {
+    "rf_arrivals": {
+      "max_depth": 8,
+      "max_features": "sqrt",
+      "min_samples_leaf": 1,
+      "min_samples_split": 2,
+      "n_estimators": 200
+    },
+    "xgb_arrivals": {
+      "colsample_bytree": 0.8,
+      "learning_rate": 0.08,
+      "max_depth": 5,
+      "n_estimators": 400,
+      "subsample": 0.9
+    },
+    "rf_revenue": {
+      "max_depth": 10,
+      "max_features": "sqrt",
+      "min_samples_leaf": 1,
+      "min_samples_split": 4,
+      "n_estimators": 400
+    },
+    "xgb_revenue": {
+      "colsample_bytree": 0.7,
+      "learning_rate": 0.05,
+      "max_depth": 6,
+      "n_estimators": 400,
+      "subsample": 0.7
+    },
+    "rf_occupancy": {
+      "max_depth": 8,
+      "max_features": 0.5,
+      "min_samples_leaf": 1,
+      "min_samples_split": 2,
+      "n_estimators": 300
+    },
+    "xgb_occupancy": {
+      "colsample_bytree": 0.8,
+      "learning_rate": 0.03,
+      "max_depth": 4,
+      "n_estimators": 400,
+      "subsample": 0.9
+    }
+  },
+  "avg_stay_nights": 3.5,
+  "model_files": {
+    "rf_arrivals": "rf_arrivals.pkl",
+    "xgb_arrivals": "xgb_arrivals.pkl",
+    "rf_revenue": "rf_revenue.pkl",
+    "xgb_revenue": "xgb_revenue.pkl",
+    "rf_occupancy": "rf_occupancy.pkl",
+    "xgb_occupancy": "xgb_occupancy.pkl"
+  }
+}

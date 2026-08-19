@@ -1,0 +1,77 @@
+{
+  "model_info": {
+    "name": "XGBoost Tourism Forecasting Model",
+    "type": "XGBRegressor",
+    "target_column": "tourism_revenue",
+    "algorithm": "XGBoost (Extreme Gradient Boosting)",
+    "problem_type": "regression"
+  },
+  "training_info": {
+    "training_date": "2026-03-06T22:59:48.276447",
+    "training_timestamp": "2026-03-06 22:59:48",
+    "source_file": "../touristData.csv",
+    "model_file": "C:\\Users\\SDJ\\Desktop\\ToristPredictionsSystem\\Ml\\models\\xgboost_tourism_revenue_20260306_225948.pkl"
+  },
+  "features": {
+    "count": 13,
+    "names": [
+      "year",
+      "month",
+      "totalcount",
+      "dollarrate",
+      "apparent_temperature_mean_celcius",
+      "sunshine_duration_seconds",
+      "rain_sum_mm",
+      "precipitation_hours",
+      "num_establishments",
+      "num_rooms",
+      "airpassengerfaresindex",
+      "consumerpriceindex",
+      "origincountry_encoded"
+    ]
+  },
+  "metrics": {
+    "rmse": 3475579159.862074,
+    "mae": 1419018934.7575498,
+    "r2_score": 0.7812214307337388,
+    "mape": 71.5294796252097,
+    "test_samples": 151
+  },
+  "preprocessing": {
+    "original_rows": 864,
+    "original_columns": 15,
+    "dropped_columns": [
+      "date"
+    ],
+    "encoded_columns": [
+      {
+        "column": "month",
+        "method": "label-encoding",
+        "categories": 12
+      },
+      {
+        "column": "totalcount",
+        "method": "label-encoding",
+        "categories": 733
+      }
+    ],
+    "missing_filled": {},
+    "final_rows": 752,
+    "final_features": 13
+  },
+  "hyperparameters": {
+    "n_estimators": 200,
+    "max_depth": 6,
+    "learning_rate": 0.1,
+    "min_child_weight": 3,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "gamma": 0.1,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "random_state": 42,
+    "n_jobs": -1,
+    "verbosity": 0
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,68 @@
+{
+  "model_info": {
+    "name": "XGBoost Tourism Forecasting Model",
+    "type": "XGBRegressor",
+    "target_column": "tourist_arrivals",
+    "algorithm": "XGBoost (Extreme Gradient Boosting)",
+    "problem_type": "regression"
+  },
+  "training_info": {
+    "training_date": "2026-03-06T23:00:03.211546",
+    "training_timestamp": "2026-03-06 23:00:03",
+    "source_file": "../data/sample_tourism_data.csv",
+    "model_file": "C:\\Users\\SDJ\\Desktop\\ToristPredictionsSystem\\Ml\\models\\xgboost_tourist_arrivals_20260306_230003.pkl"
+  },
+  "features": {
+    "count": 6,
+    "names": [
+      "year",
+      "month",
+      "hotel_occupancy",
+      "tourism_revenue",
+      "exchange_rate",
+      "inflation"
+    ]
+  },
+  "metrics": {
+    "rmse": 4150.621145797041,
+    "mae": 3345.72109375,
+    "r2_score": 0.989743550359925,
+    "mape": 20.678140520480856,
+    "test_samples": 10
+  },
+  "preprocessing": {
+    "original_rows": 48,
+    "original_columns": 9,
+    "dropped_columns": [],
+    "encoded_columns": [
+      {
+        "column": "source_market",
+        "method": "one-hot",
+        "categories": 6
+      },
+      {
+        "column": "region",
+        "method": "one-hot",
+        "categories": 3
+      }
+    ],
+    "missing_filled": {},
+    "final_rows": 48,
+    "final_features": 6
+  },
+  "hyperparameters": {
+    "n_estimators": 200,
+    "max_depth": 6,
+    "learning_rate": 0.1,
+    "min_child_weight": 3,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "gamma": 0.1,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "random_state": 42,
+    "n_jobs": -1,
+    "verbosity": 0
+  },
+  "version": "1.0.0"
+}
