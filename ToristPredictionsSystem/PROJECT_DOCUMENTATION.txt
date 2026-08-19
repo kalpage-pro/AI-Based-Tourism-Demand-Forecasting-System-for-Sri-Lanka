@@ -1,0 +1,391 @@
+================================================================================
+       AI-BASED TOURISM DEMAND FORECASTING SYSTEM FOR SRI LANKA
+                         PROJECT DOCUMENTATION
+================================================================================
+
+OVERVIEW
+--------
+This is a full-stack web application that predicts tourist arrivals, tourism 
+revenue (in LKR), and hotel occupancy rates using machine learning models. 
+The system helps tourism stakeholders (government agencies, hotels, airlines) 
+make data-driven decisions for planning, marketing, and resource allocation.
+
+Technology Stack:
+- Frontend: React 18 + Vite
+- Backend: Node.js + Express + MongoDB
+- ML Engine: Python (scikit-learn, XGBoost)
+- Database: MongoDB
+- Authentication: JWT with role-based access
+
+
+================================================================================
+                            MAIN FEATURES
+================================================================================
+
+1. PREDICTION FEATURES
+----------------------
+   a) Single Predictions
+      - Generate real-time predictions for a specific month
+      - Select prediction type: Tourist Arrivals, Revenue, Occupancy, or All
+      - Input parameters: Year, Month, USD/LKR Exchange Rate
+      - Get results with confidence scores
+
+   b) Batch Predictions
+      - Generate predictions for multiple months at once
+      - Select date range (start month to end month)
+      - Get aggregated results with totals and averages
+      - View month-by-month breakdown
+
+   c) Model Selection
+      - Random Forest (RF) - Default model
+      - XGBoost (XGB) - Alternative model
+      - Compare results between both models
+
+
+2. ANALYTICS & INSIGHTS
+-----------------------
+   a) Feature Importance Analysis
+      - See which factors most influence predictions
+      - Visual breakdown of variable contributions
+      - Factors: Exchange rate, temperature, rainfall, CPI, etc.
+
+   b) Model Comparison
+      - Side-by-side performance metrics
+      - MAE (Mean Absolute Error)
+      - RMSE (Root Mean Square Error)
+      - R² Score (Accuracy)
+
+   c) Seasonal Patterns
+      - Monthly averages across years
+      - Seasonal indices (high/low season identification)
+      - Peak season: December to March
+      - Low season: May to September
+
+   d) Yearly Trends
+      - Year-over-year growth analysis
+      - Historical trend visualization
+      - Long-term patterns
+
+   e) 12-Month Forecast
+      - Forward-looking predictions
+      - Automated trend projection
+
+
+3. SCENARIO SIMULATION (WHAT-IF ANALYSIS)
+-----------------------------------------
+   a) Pre-built Scenario Templates:
+      - Economic Boom: High growth scenario
+      - Economic Crisis: Recession impact
+      - Low Season: Off-peak period
+      - High Season: Peak tourism period
+
+   b) Custom Scenarios:
+      - Adjust any parameter manually
+      - Test exchange rate changes
+      - Model infrastructure improvements
+      - Weather impact simulation
+
+   c) Impact Analysis:
+      - Compare scenario vs baseline
+      - Percentage change calculations
+      - Visual comparison charts
+
+
+4. EXPORT & REPORTING
+---------------------
+   a) CSV Export
+      - Download predictions as CSV files
+      - Export historical data
+      - Date range filtering
+      - All prediction types included
+
+   b) PDF Reports
+      - Formatted tourism reports
+      - Summary statistics
+      - Tables with timestamps
+      - Professional layout
+
+   c) Export History
+      - Track all previous exports
+      - Re-download past reports
+
+
+5. DESTINATION MANAGEMENT
+-------------------------
+   a) Tourist Destinations Database
+      - Browse featured Sri Lankan destinations
+      - Filter by region (Western, Southern, Central, etc.)
+      - Filter by category (Beach, Cultural, Wildlife, etc.)
+
+   b) Hotel Information
+      - Hotels by destination
+      - Star ratings
+      - Price per night (in LKR)
+      - Contact information
+
+   c) Flight Information
+      - Economic flight options
+      - Domestic transport routes
+      - Prices and duration
+
+
+6. DASHBOARD
+------------
+   - Total predictions count
+   - Average accuracy percentage
+   - Total predicted revenue (LKR)
+   - Recent predictions list
+   - Monthly trend charts
+   - Year-over-year comparison
+
+
+================================================================================
+                          USER ROLES & PERMISSIONS
+================================================================================
+
+ADMIN ROLE
+----------
+Can perform all actions plus:
+- Upload CSV files for user downloads
+- Manage user accounts (create, edit, delete)
+- Change user roles (user/admin)
+- View all predictions across all users
+- Manage destinations, hotels, flights
+- View system statistics
+- Access activity logs
+
+USER ROLE
+---------
+- Create single and batch predictions
+- View own prediction history
+- Access analytics and insights
+- Run scenario simulations
+- Export own predictions to CSV/PDF
+- Download files shared by admins
+- Browse destinations
+- Update personal profile
+
+
+================================================================================
+                          HOW TO USE THE SYSTEM
+================================================================================
+
+GETTING STARTED
+---------------
+1. Register a new account or login
+2. Navigate to Dashboard to see overview
+3. Go to "Predictions" to create your first prediction
+
+MAKING A PREDICTION
+-------------------
+1. Navigate to Predictions page
+2. Select prediction type:
+   - Tourist Arrivals: Number of tourists expected
+   - Revenue: Expected tourism revenue in LKR
+   - Rooms: Hotel occupancy prediction
+   - All: Get all three predictions together
+
+3. Enter parameters:
+   - Year (2024-2030)
+   - Month (January-December)
+   - USD/LKR Exchange Rate
+
+4. Select model (Random Forest or XGBoost)
+5. Click "Generate Prediction"
+6. View results with confidence scores
+
+BATCH PREDICTIONS
+-----------------
+1. Go to Predictions page
+2. Click "Batch Prediction" tab
+3. Select start date and end date
+4. Choose prediction type and model
+5. Generate predictions
+6. View totals, averages, and monthly breakdown
+
+RUNNING SCENARIO ANALYSIS
+-------------------------
+1. Navigate to Scenarios page
+2. Choose a template OR create custom scenario
+3. Adjust parameters as needed:
+   - Exchange rate
+   - Temperature
+   - Fuel prices
+   - Number of hotels/rooms
+4. Run simulation
+5. Compare results with baseline
+
+EXPORTING DATA
+--------------
+1. Go to Reports page
+2. Select export format (CSV or PDF)
+3. Choose date range (optional)
+4. Select prediction types to include
+5. Click Download
+6. File will be saved to your computer
+
+VIEWING ANALYTICS
+-----------------
+1. Navigate to Analytics page
+2. Tabs available:
+   - Feature Importance: What factors drive predictions
+   - Model Comparison: RF vs XGBoost performance
+   - Seasonal Patterns: Monthly trends
+   - Forecast: 12-month predictions
+   - Destination Analytics: Regional breakdown
+
+
+================================================================================
+                          PREDICTION TYPES EXPLAINED
+================================================================================
+
+1. TOURIST ARRIVALS
+   - What: Number of tourists expected to visit Sri Lanka
+   - Unit: Persons
+   - Use Case: Staffing decisions, marketing budget allocation
+
+2. TOURISM REVENUE
+   - What: Expected economic returns from tourism
+   - Unit: Sri Lankan Rupees (LKR)
+   - Use Case: Financial planning, budget forecasting
+
+3. HOTEL OCCUPANCY (ROOMS)
+   - What: Number of hotel rooms expected to be booked
+   - Unit: Room count / Percentage
+   - Use Case: Pricing strategies, maintenance scheduling
+
+4. ALL (COMPLETE ANALYSIS)
+   - What: All three predictions together
+   - Use Case: Comprehensive tourism planning
+
+
+================================================================================
+                          ML MODEL DETAILS
+================================================================================
+
+MODELS AVAILABLE
+----------------
+1. Random Forest (RF)
+   - Ensemble of decision trees
+   - Good for handling complex patterns
+   - Default model
+
+2. XGBoost (XGB)
+   - Gradient boosting algorithm
+   - Often higher accuracy
+   - Alternative option
+
+INPUT FEATURES (19 PARAMETERS)
+------------------------------
+Temporal: Year, Month
+Economic: USD/LKR Rate, CPI, Airfare Index
+Weather: Temperature, Sunshine, Rainfall
+Infrastructure: Number of Hotels, Number of Rooms
+Lag Features: Previous month arrivals, Previous year same month
+Rolling Averages: 3-month, 6-month moving averages
+
+CONFIDENCE SCORES
+-----------------
+- High (90%+): Very reliable prediction
+- Medium (75-89%): Good reliability
+- Low (<75%): Consider with caution
+
+
+================================================================================
+                          API ENDPOINTS REFERENCE
+================================================================================
+
+Authentication:
+- POST /api/v1/auth/register - Register new user
+- POST /api/v1/auth/login - Login and get token
+- GET /api/v1/auth/me - Get current user profile
+
+Predictions:
+- POST /api/v1/predictions - Create single prediction
+- POST /api/v1/predictions/batch - Create batch predictions
+- GET /api/v1/predictions - Get user's predictions
+- GET /api/v1/predictions/:id - Get specific prediction
+
+Dashboard:
+- GET /api/v1/dashboard/stats - Get dashboard statistics
+- GET /api/v1/dashboard/trends - Get monthly trends
+- GET /api/v1/dashboard/comparison - Get year comparison
+
+Analytics:
+- GET /api/v1/analytics/feature-importance - Get feature importance
+- GET /api/v1/analytics/model-comparison - Compare models
+- GET /api/v1/analytics/seasonal-patterns - Get seasonal data
+- GET /api/v1/analytics/accuracy - Get prediction accuracy
+
+Scenarios:
+- POST /api/v1/scenarios/run - Run scenario simulation
+- GET /api/v1/scenarios/templates - Get scenario templates
+- POST /api/v1/scenarios/what-if - What-if analysis
+
+Export:
+- POST /api/v1/export/csv - Export as CSV
+- POST /api/v1/export/pdf - Export as PDF
+- GET /api/v1/export/history - Get export history
+
+Destinations:
+- GET /api/v1/destinations - Get all destinations
+- GET /api/v1/destinations/:id - Get specific destination
+- GET /api/v1/destinations/search - Search destinations
+
+Admin:
+- GET /api/v1/admin/users - Get all users
+- PUT /api/v1/admin/users/:id - Update user
+- DELETE /api/v1/admin/users/:id - Delete user
+- POST /api/v1/admin/upload - Upload file
+- GET /api/v1/admin/files - Get uploaded files
+
+
+================================================================================
+                          FILE STRUCTURE
+================================================================================
+
+ToristPredictionsSystem/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/     # API endpoint handlers
+│   │   ├── models/          # MongoDB schemas
+│   │   ├── routes/          # API route definitions
+│   │   ├── services/        # Business logic
+│   │   ├── middleware/      # Auth, validation, error handling
+│   │   ├── utils/           # Helper functions
+│   │   ├── seeds/           # Database seed data
+│   │   └── config/          # Database and ML configuration
+│   └── uploads/             # Uploaded files storage
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/      # React UI components
+│   │   ├── pages/           # Page components
+│   │   ├── services/        # API service calls
+│   │   ├── context/         # React context (Auth, Theme)
+│   │   ├── hooks/           # Custom React hooks
+│   │   └── utils/           # Helper utilities
+│   └── public/              # Static assets
+│
+└── Ml/
+    ├── src/
+    │   ├── train_model.py   # Train Random Forest models
+    │   ├── train_xgboost.py # Train XGBoost models
+    │   ├── predict.py       # Generate predictions
+    │   └── data_processor.py # Data preprocessing
+    ├── models/              # Trained model files (.pkl)
+    └── data/                # Training data (CSV)
+
+
+================================================================================
+                          CONTACT & SUPPORT
+================================================================================
+
+For technical support or questions about the system, please contact the
+system administrator or development team.
+
+Project: AI-Based Tourism Demand Forecasting System for Sri Lanka
+Version: 1.0.0
+Last Updated: March 2026
+
+================================================================================
